@@ -1,3 +1,9 @@
+/* 🎵 Ocultar reproductor de audio */
+audio {
+  display: none;
+}
+
+/* Estilos base */
 body {
   margin: 0;
   padding: 0;
