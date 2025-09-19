@@ -17,16 +17,19 @@ audio {
   z-index: 10;
 }
 
-/* ❤️ Botón corazón grande con borde rosado iluminado */
+/* ❤️ Botón corazón con borde de neón rosado */
 #corazon {
   width: 200px;
   height: 200px;
-  background-color: #c0c0c0; /* gris claro */
-  border: none;
+  background-color: #222; /* gris oscuro */
+  border: 4px solid #ff69b4; /* borde rosado tipo neón */
+  border-radius: 50%;
   cursor: pointer;
   position: relative;
   transform: rotate(-45deg);
-  box-shadow: 0 0 20px rgba(255, 105, 180, 0.4); /* sombra rosada suave */
+  box-shadow:
+    0 0 8px #ff69b4,
+    0 0 12px #ff69b4 inset; /* resplandor externo e interno */
   animation: latido 2s infinite;
   z-index: 11;
 }
@@ -35,8 +38,12 @@ audio {
 #corazon::after {
   content: "";
   position: absolute;
-  background-color: #c0c0c0;
+  background-color: #222;
+  border: 4px solid #ff69b4;
   border-radius: 50%;
+  box-shadow:
+    0 0 8px #ff69b4,
+    0 0 12px #ff69b4 inset;
 }
 
 #corazon::before {
@@ -57,11 +64,9 @@ audio {
 @keyframes latido {
   0%, 100% {
     transform: scale(1) rotate(-45deg);
-    box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
   }
   50% {
     transform: scale(1.1) rotate(-45deg);
-    box-shadow: 0 0 40px rgba(255, 105, 180, 0.8);
   }
 }
 
