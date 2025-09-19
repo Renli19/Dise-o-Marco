@@ -3,29 +3,31 @@ audio {
   display: none;
 }
 
-/* ❤️ Botón corazón centrado */
+/* 🌌 Fondo circular degradado gris */
 #pantalla-inicial {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(to bottom right, #ffb6c1, #ffe4e1);
+  background: radial-gradient(circle, #d3d3d3 0%, #2f2f2f 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10;
 }
 
+/* ❤️ Botón corazón grande con borde rosado iluminado */
 #corazon {
-  width: 150px;
-  height: 150px;
-  background-color: red;
+  width: 200px;
+  height: 200px;
+  background-color: #c0c0c0; /* gris claro */
   border: none;
   cursor: pointer;
   position: relative;
   transform: rotate(-45deg);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.4); /* sombra rosada suave */
+  animation: latido 2s infinite;
   z-index: 11;
 }
 
@@ -33,43 +35,55 @@ audio {
 #corazon::after {
   content: "";
   position: absolute;
-  background-color: red;
+  background-color: #c0c0c0;
   border-radius: 50%;
 }
 
 #corazon::before {
-  width: 150px;
-  height: 150px;
-  top: -75px;
+  width: 200px;
+  height: 200px;
+  top: -100px;
   left: 0;
 }
 
 #corazon::after {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   top: 0;
-  left: 75px;
+  left: 100px;
+}
+
+/* 💓 Animación de latido con sombra pulsante */
+@keyframes latido {
+  0%, 100% {
+    transform: scale(1) rotate(-45deg);
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+  }
+  50% {
+    transform: scale(1.1) rotate(-45deg);
+    box-shadow: 0 0 40px rgba(255, 105, 180, 0.8);
+  }
 }
 
 /* Responsive: corazón más pequeño en móviles */
 @media (max-width: 480px) {
   #corazon {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
   }
 
   #corazon::before,
   #corazon::after {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
   }
 
   #corazon::before {
-    top: -50px;
+    top: -65px;
   }
 
   #corazon::after {
-    left: 50px;
+    left: 65px;
   }
 }
 
@@ -77,7 +91,7 @@ audio {
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom right, #ffb6c1, #ffe4e1);
+  background: radial-gradient(circle, #d3d3d3 0%, #2f2f2f 100%);
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   justify-content: center;
@@ -94,15 +108,16 @@ body {
 
 h1 {
   font-size: 2.5em;
-  color: #8b0000;
+  color: #ff69b4;
   margin-bottom: 10px;
 }
 
 p {
   font-size: 1.2em;
-  color: #4b0082;
+  color: #f0f0f0;
   margin-bottom: 20px;
 }
+
 
 button {
   padding: 10px 20px;
@@ -123,7 +138,7 @@ button:hover {
   display: none;
   margin-top: 20px;
   font-size: 1.1em;
-  color: #800000;
+  color: #ffb6c1;
 }
 
 /* Responsive: tablets */
@@ -131,6 +146,7 @@ button:hover {
   h1 {
     font-size: 2em;
   }
+
 
   p {
     font-size: 1.1em;
