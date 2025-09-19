@@ -21,7 +21,7 @@ audio {
 #corazon {
   width: 200px;
   height: 200px;
-  background-color: #222222; /* gris oscuro */
+  background-color: #c0c0c0; /* gris claro */
   border: none;
   cursor: pointer;
   position: relative;
