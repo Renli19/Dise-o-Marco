@@ -1,14 +1,20 @@
+/* Estilos base */
 body {
   margin: 0;
   padding: 0;
   background: linear-gradient(to bottom right, #ffb6c1, #ffe4e1);
   font-family: 'Segoe UI', sans-serif;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
+  min-height: 100vh;
   text-align: center;
+}
+
+.contenedor {
+  max-width: 800px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -20,7 +26,6 @@ h1 {
 p {
   font-size: 1.2em;
   color: #4b0082;
-  max-width: 600px;
   margin-bottom: 20px;
 }
 
@@ -44,4 +49,39 @@ button:hover {
   margin-top: 20px;
   font-size: 1.1em;
   color: #800000;
+}
+
+/* Responsive: tablets */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  p {
+    font-size: 1.1em;
+  }
+
+  button {
+    font-size: 0.95em;
+  }
+}
+
+/* Responsive: celulares */
+@media (max-width: 480px) {
+  .contenedor {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.6em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+
+  button {
+    font-size: 0.9em;
+    padding: 8px 16px;
+  }
 }
