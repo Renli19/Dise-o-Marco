@@ -23,29 +23,32 @@ audio {
   background-color: red;
   border: none;
   cursor: pointer;
-  transform: rotate(-45deg);
   position: relative;
+  transform: rotate(-45deg);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  z-index: 11;
 }
 
 #corazon::before,
 #corazon::after {
   content: "";
-  width: 150px;
-  height: 150px;
+  position: absolute;
   background-color: red;
   border-radius: 50%;
-  position: absolute;
 }
 
 #corazon::before {
+  width: 150px;
+  height: 150px;
   top: -75px;
   left: 0;
 }
 
 #corazon::after {
-  left: 75px;
+  width: 150px;
+  height: 150px;
   top: 0;
+  left: 75px;
 }
 
 /* Responsive: corazón más pequeño en móviles */
