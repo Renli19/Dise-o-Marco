@@ -10,7 +10,7 @@ audio {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: radial-gradient(circle, #1F1F1F1F 0%, #121212 100%);
+  background: radial-gradient(circle, #d3d3d3 0%, #2f2f2f 100%);
   display: flex;
   justify-content: center;
   align-items: center;
