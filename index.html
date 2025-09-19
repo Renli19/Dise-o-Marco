@@ -1,66 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Para Ti, Amor</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #ffb6c1, #ffe4e1);
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.5em;
-      color: #8b0000;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.2em;
-      color: #4b0082;
-      max-width: 600px;
-      margin-bottom: 20px;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 1em;
-      background-color: #ff69b4;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #ff1493;
-    }
-
-    #sorpresa {
-      display: none;
-      margin-top: 20px;
-      font-size: 1.1em;
-      color: #800000;
-    }
-  </style>
+  <link rel="stylesheet" href="estilos.css" />
 </head>
 <body>
-  <h1>Feliz 21 de Septiembre, Mi Amor 💖</h1>
-  <p>Esta página es solo para ti. Porque cada día contigo es un regalo, y hoy quiero celebrarlo de una forma especial.</p>
-  <button onclick="mostrarSorpresa()">Haz clic para descubrir</button>
-  <div id="sorpresa">
-    <p>✨ Aquí irá tu sorpresa personalizada ✨</p>
-  </div>
+  <main class="contenedor">
+    <h1>Feliz 21 de Septiembre, Mi Amor 💖</h1>
+    <p>
+      Esta página es solo para ti. Porque cada día contigo es un regalo, y hoy quiero celebrarlo de una forma especial.
+    </p>
+    <button onclick="mostrarSorpresa()">Haz clic para descubrir</button>
+    <div id="sorpresa">
+      <p>✨ Aquí irá tu sorpresa personalizada ✨</p>
+    </div>
+  </main>
 
   <script>
     function mostrarSorpresa() {
