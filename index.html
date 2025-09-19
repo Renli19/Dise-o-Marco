@@ -7,13 +7,19 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- 🎵 Música de fondo -->
-  <audio autoplay loop>
+  <!-- 🎵 Música de fondo (inicialmente pausada) -->
+  <audio id="musica" loop>
     <source src="cancion.mp3" type="audio/mpeg" />
     Tu navegador no soporta audio HTML5.
   </audio>
 
-  <main class="contenedor">
+  <!-- ❤️ Botón corazón centrado -->
+  <div id="pantalla-inicial">
+    <button id="corazon" onclick="activarPagina()" aria-label="Activar música y mostrar contenido"></button>
+  </div>
+
+  <!-- 🌸 Contenido oculto inicialmente -->
+  <main class="contenedor" id="contenido" style="display: none;">
     <h1>Feliz 21 de Septiembre, Mi Amor 💖</h1>
     <p>
       Esta página es solo para ti. Porque cada día contigo es un regalo, y hoy quiero celebrarlo de una forma especial.
@@ -25,6 +31,12 @@
   </main>
 
   <script>
+    function activarPagina() {
+      document.getElementById("musica").play();
+      document.getElementById("pantalla-inicial").style.display = "none";
+      document.getElementById("contenido").style.display = "block";
+    }
+
     function mostrarSorpresa() {
       document.getElementById("sorpresa").style.display = "block";
     }
