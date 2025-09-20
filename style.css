@@ -27,7 +27,7 @@ audio {
 }
 
 #corazon img {
-  width: 1000px;
+  width: 500px;
   height: auto;
   background-color: #ff69b4;
   -webkit-mask-image: url("heart.png");
