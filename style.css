@@ -3,70 +3,53 @@ audio {
   display: none;
 }
 
-/* 🌌 Fondo circular degradado gris */
+/* 🌌 Fondo circular degradado gris oscuro */
 #pantalla-inicial {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background: radial-gradient(circle, #1F1F1F1F 0%, #242424 100%);
+  background: radial-gradient(circle, #1F1F1F 0%, #0F0F0F 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10;
 }
 
-/* ❤️ Botón corazón con borde de neón rosado */
+/* ❤️ Botón corazón con borde de neón rosado unificado */
 #corazon {
   width: 200px;
   height: 200px;
-  background-color: #222; /* gris oscuro */
-  border: 4px solid #ff69b4; /* borde rosado tipo neón */
-  border-radius: 50%;
+  background-color: #222;
+  border: none;
   cursor: pointer;
   position: relative;
-  transform: rotate(-45deg);
-  box-shadow:
-    0 0 8px #ff69b4,
-    0 0 12px #ff69b4 inset; /* resplandor externo e interno */
-  animation: latido 2s infinite;
   z-index: 11;
-}
-
-#corazon::before,
-#corazon::after {
-  content: "";
-  position: absolute;
-  background-color: #222;
-  border: 4px solid #ff69b4;
-  border-radius: 50%;
+  animation: latido 2s infinite;
   box-shadow:
     0 0 8px #ff69b4,
-    0 0 12px #ff69b4 inset;
+    0 0 12px #ff69b4,
+    0 0 16px #ff69b4 inset;
+  transform: rotate(-45deg);
+  clip-path: path("M100 180 C40 140, 0 80, 50 40 C100 0, 150 40, 200 80 C250 120, 200 180, 100 180 Z");
 }
 
-#corazon::before {
-  width: 200px;
-  height: 200px;
-  top: -100px;
-  left: 0;
-}
-
-#corazon::after {
-  width: 200px;
-  height: 200px;
-  top: 0;
-  left: 100px;
-}
-
-/* 💓 Animación de latido con sombra pulsante */
+/* 💓 Animación de latido con brillo pulsante */
 @keyframes latido {
   0%, 100% {
     transform: scale(1) rotate(-45deg);
+    box-shadow:
+      0 0 8px #ff69b4,
+      0 0 12px #ff69b4,
+      0 0 16px #ff69b4 inset;
   }
   50% {
     transform: scale(1.1) rotate(-45deg);
+    box-shadow:
+      0 0 12px #ff69b4,
+      0 0 20px #ff69b4,
+      0 0 24px #ff69b4 inset;
   }
 }
 
@@ -75,20 +58,7 @@ audio {
   #corazon {
     width: 130px;
     height: 130px;
-  }
-
-  #corazon::before,
-  #corazon::after {
-    width: 130px;
-    height: 130px;
-  }
-
-  #corazon::before {
-    top: -65px;
-  }
-
-  #corazon::after {
-    left: 65px;
+    clip-path: path("M65 117 C26 91, 0 52, 32 26 C65 0, 97 26, 130 52 C162 78, 130 117, 65 117 Z");
   }
 }
 
@@ -96,7 +66,7 @@ audio {
 body {
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle, #d3d3d3 0%, #2f2f2f 100%);
+  background: radial-gradient(circle, #1F1F1F 0%, #0F0F0F 100%);
   font-family: 'Segoe UI', sans-serif;
   display: flex;
   justify-content: center;
@@ -122,7 +92,6 @@ p {
   color: #f0f0f0;
   margin-bottom: 20px;
 }
-
 
 button {
   padding: 10px 20px;
@@ -152,7 +121,6 @@ button:hover {
     font-size: 2em;
   }
 
-
   p {
     font-size: 1.1em;
   }
@@ -179,5 +147,20 @@ button:hover {
   button {
     font-size: 0.9em;
     padding: 8px 16px;
+  }
+}
+
+/* Responsive: pantallas grandes (PC) */
+@media (min-width: 1024px) {
+  .contenedor {
+    padding: 40px;
+  }
+
+  h1 {
+    font-size: 3em;
+  }
+
+  p {
+    font-size: 1.3em;
   }
 }
