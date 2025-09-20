@@ -13,13 +13,29 @@
     Tu navegador no soporta audio HTML5.
   </audio>
 
-  <!-- ❤️ Pantalla inicial con corazón -->
+  <!-- ❤️ Sección 1: pantalla inicial con corazón -->
   <div id="pantalla-inicial">
-    <button id="corazon" onclick="activarPagina()" aria-label="Activar música y mostrar contenido"></button>
+    <button id="corazon" onclick="activarPagina()" aria-label="Activar música y mostrar contenido">
+      <img src="resources/heart.png" alt="Corazón" />
+    </button>
   </div>
 
-  <!-- 🌸 Contenido oculto inicialmente -->
-  <main class="contenedor" id="contenido" style="display: none;">
+  <!-- 🌸 Sección 2: imagen + poema -->
+  <section id="seccion2" style="display: none;">
+    <div class="contenido-seccion2">
+      <div class="texto-poema">
+        <p>
+          Este es un párrafo de prueba donde pronto aparecerá un poema lleno de emociones y recuerdos.
+        </p>
+      </div>
+      <div class="imagen-lateral">
+        <img src="resources/image/6.png" alt="Imagen romántica" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 💖 Sección 4: mensaje final -->
+  <main class="contenedor" id="seccion4" style="display: none;">
     <h1>Feliz 21 de Septiembre, Mi Amor 💖</h1>
     <p>
       Esta página es solo para ti. Porque cada día contigo es un regalo, y hoy quiero celebrarlo de una forma especial.
@@ -30,11 +46,16 @@
     </div>
   </main>
 
-  <script>
+    <script>
     function activarPagina() {
       document.getElementById("musica").play();
       document.getElementById("pantalla-inicial").style.display = "none";
-      document.getElementById("contenido").style.display = "block";
+      document.getElementById("seccion2").style.display = "flex";
+    }
+
+    function mostrarSeccion4() {
+      document.getElementById("seccion2").style.display = "none";
+      document.getElementById("seccion4").style.display = "block";
     }
 
     function mostrarSorpresa() {
