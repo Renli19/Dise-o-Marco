@@ -1,24 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Feliz Cumpleaños Angel 🎂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="card">
-    <h1>🎉 Feliz cumpleaños Angel 🎉</h1>
-    <div class="saitama-container">
-      <img id="saitama" src="https://i.imgur.com/O5bJtD8.png" alt="Saitama con pastel" />
-    </div>
-    <button id="surprise-btn">🎁 Sorpresa</button>
-    <canvas id="confetti"></canvas>
-  </div>
+  <main class="scene">
+    <h1 id="title-static" class="title">🎉 ¡Sorpresa! 🎉</h1>
 
-  <!-- Efecto de sonido -->
-  <audio id="punch-sound" src="https://actions.google.com/sounds/v1/impacts/punch_face_02.ogg" preload="auto"></audio>
+    <div class="stage">
+      <!-- Saitama (dibujado en CSS) -->
+      <div class="saitama" id="saitama">
+        <div class="cape"></div>
+        <div class="torso">
+          <div class="belt"></div>
+          <div class="legs"></div>
+        </div>
+
+        <div class="head">
+          <div class="face">
+            <div class="eye eye-left"></div>
+            <div class="eye eye-right"></div>
+            <div class="mouth"></div>
+            <div class="collar"></div>
+          </div>
+        </div>
+
+        <!-- Brazos -->
+        <div class="arm arm-left">
+          <div class="glove"></div>
+        </div>
+        <div class="arm arm-right" id="punch-arm">
+          <div class="glove"></div>
+        </div>
+
+      </div>
+
+      <!-- Onda de impacto -->
+      <div id="impact" class="impact"></div>
+
+      <!-- Pastel (oculto inicialmente) -->
+      <div id="cake" class="cake hidden" aria-hidden="true">
+        <div class="cake-body">
+          <div class="icing"></div>
+          <div class="candles">
+            <div class="candle" style="--i:0"></div>
+            <div class="candle" style="--i:1"></div>
+            <div class="candle" style="--i:2"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensaje final (oculto inicialmente) -->
+      <div id="final-msg" class="final-msg hidden">🎂 Feliz cumpleaños Angel 🎂</div>
+    </div>
+
+    <button id="surprise-btn" class="btn">🎁 Sorpresa</button>
+
+    <!-- Canvas confeti -->
+    <canvas id="confetti"></canvas>
+  </main>
 
   <script src="script.js"></script>
 </body>
