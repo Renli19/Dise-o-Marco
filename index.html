@@ -9,59 +9,20 @@
 </head>
 <body>
   <main class="scene">
-    <h1 id="title-static" class="title">🎉 ¡Sorpresa! 🎉</h1>
+    <h1 id="pre-title" class="title">🎉 ¡Sorpresa! 🎉</h1>
 
-    <div class="stage">
-      <!-- Saitama (dibujado en CSS) -->
-      <div class="saitama" id="saitama">
-        <div class="cape"></div>
-        <div class="torso">
-          <div class="belt"></div>
-          <div class="legs"></div>
-        </div>
+    <div class="canvas-wrap">
+      <!-- canvas principal para Saitama y efectos -->
+      <canvas id="hero-canvas" aria-label="Saitama animado"></canvas>
 
-        <div class="head">
-          <div class="face">
-            <div class="eye eye-left"></div>
-            <div class="eye eye-right"></div>
-            <div class="mouth"></div>
-            <div class="collar"></div>
-          </div>
-        </div>
+      <!-- canvas para confeti -->
+      <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
-        <!-- Brazos -->
-        <div class="arm arm-left">
-          <div class="glove"></div>
-        </div>
-        <div class="arm arm-right" id="punch-arm">
-          <div class="glove"></div>
-        </div>
-
-      </div>
-
-      <!-- Onda de impacto -->
-      <div id="impact" class="impact"></div>
-
-      <!-- Pastel (oculto inicialmente) -->
-      <div id="cake" class="cake hidden" aria-hidden="true">
-        <div class="cake-body">
-          <div class="icing"></div>
-          <div class="candles">
-            <div class="candle" style="--i:0"></div>
-            <div class="candle" style="--i:1"></div>
-            <div class="candle" style="--i:2"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mensaje final (oculto inicialmente) -->
-      <div id="final-msg" class="final-msg hidden">🎂 Feliz cumpleaños Angel 🎂</div>
+      <!-- Impact ripple (for accessibility fallback) -->
+      <div id="final-msg" class="final-msg visually-hidden">🎂 Feliz cumpleaños Angel 🎂</div>
     </div>
 
     <button id="surprise-btn" class="btn">🎁 Sorpresa</button>
-
-    <!-- Canvas confeti -->
-    <canvas id="confetti"></canvas>
   </main>
 
   <script src="script.js"></script>
