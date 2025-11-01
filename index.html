@@ -3,64 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Para Ti, Amor</title>
+  <title>Feliz Cumpleaños Angel 🎂</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- 🎵 Música de fondo (inicialmente pausada) -->
-  <audio id="musica" loop>
-    <source src="cancion.mp3" type="audio/mpeg" />
-    Tu navegador no soporta audio HTML5.
-  </audio>
-
-  <!-- ❤️ Sección 1: pantalla inicial con corazón -->
-  <div id="pantalla-inicial">
-    <button id="corazon" onclick="activarPagina()" aria-label="Activar música y mostrar contenido">
-      <img src="heart.png" alt="Corazón" />
-    </button>
+  <div class="card">
+    <h1>🎉 Feliz cumpleaños Angel 🎉</h1>
+    <div class="saitama-container">
+      <img id="saitama" src="https://i.imgur.com/O5bJtD8.png" alt="Saitama con pastel" />
+    </div>
+    <button id="surprise-btn">🎁 Sorpresa</button>
+    <canvas id="confetti"></canvas>
   </div>
 
-  <!-- 🌸 Sección 2: imagen + poema -->
-  <section id="seccion2" style="display: none;">
-    <div class="contenido-seccion2">
-      <div class="texto-poema">
-        <p>
-          Este es un párrafo de prueba donde pronto aparecerá un poema lleno de emociones y recuerdos.
-        </p>
-      </div>
-      <div class="imagen-lateral">
-        <img src="6.png" alt="Imagen romántica" />
-      </div>
-    </div>
-  </section>
+  <!-- Efecto de sonido -->
+  <audio id="punch-sound" src="https://actions.google.com/sounds/v1/impacts/punch_face_02.ogg" preload="auto"></audio>
 
-  <!-- 💖 Sección 4: mensaje final -->
-  <main class="contenedor" id="seccion4" style="display: none;">
-    <h1>Feliz 21 de Septiembre, Mi Amor 💖</h1>
-    <p>
-      Esta página es solo para ti. Porque cada día contigo es un regalo, y hoy quiero celebrarlo de una forma especial.
-    </p>
-    <button onclick="mostrarSorpresa()">Haz clic para descubrir</button>
-    <div id="sorpresa">
-      <p>✨ Aquí irá tu sorpresa personalizada ✨</p>
-    </div>
-  </main>
-
-    <script>
-    function activarPagina() {
-      document.getElementById("musica").play();
-      document.getElementById("pantalla-inicial").style.display = "none";
-      document.getElementById("seccion2").style.display = "flex";
-    }
-
-    function mostrarSeccion4() {
-      document.getElementById("seccion2").style.display = "none";
-      document.getElementById("seccion4").style.display = "block";
-    }
-
-    function mostrarSorpresa() {
-      document.getElementById("sorpresa").style.display = "block";
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
