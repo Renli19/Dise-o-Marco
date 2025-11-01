@@ -1,217 +1,75 @@
-audio {
-  display: none;
-}
-
-/* 🌌 Sección 1: fondo oscuro */
-#pantalla-inicial {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: radial-gradient(circle, #822145 0%, #52132a 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-
-/* ❤️ Botón con imagen de corazón y efecto de neón */
-#corazon {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  animation: latido 2s infinite;
-  z-index: 11;
-}
-
-#corazon img {
-  width: 500px;
-  height: auto;
-  background-color: #ff69b4;
-  -webkit-mask-image: url("heart.png");
-  mask-image: url("heart.png");
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-position: center;
-  mask-position: center;
-  filter: drop-shadow(0 0 8px #ff69b4) drop-shadow(0 0 12px #ff69b4);
-  transition: transform 0.3s ease;
-}
-
-/* 💓 Animación de latido */
-@keyframes latido {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-/* 🌸 Sección 2: fondo rosa, imagen derecha, texto izquierda */
-#seccion2 {
-  width: 100%;
-  height: 100vh;
-  background-color: #f7b8c6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.contenido-seccion2 {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-
-.texto-poema {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  color: #4a4a4a;
-  font-size: 1.4em;
-  line-height: 1.6;
-}
-
-.imagen-lateral {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 100%;
-  overflow: hidden;
-}
-
-.imagen-lateral img {
-  height: 100%;
-  object-fit: cover;
-  border-left: 4px solid #ff69b4;
-
-  /* 🎨 Efecto de barrido más suave y menos invasivo */
-  -webkit-mask-image: linear-gradient(to left,
-    rgba(0,0,0,1) 25%,
-    rgba(0,0,0,0.7) 45%,
-    rgba(0,0,0,0.3) 65%,
-    rgba(0,0,0,0.05) 85%,
-    rgba(0,0,0,0) 100%);
-  mask-image: linear-gradient(to left,
-    rgba(0,0,0,1) 25%,
-    rgba(0,0,0,0.7) 45%,
-    rgba(0,0,0,0.3) 65%,
-    rgba(0,0,0,0.05) 85%,
-    rgba(0,0,0,0) 100%);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-}
-
-/* 💖 Sección 4: mensaje final */
-#seccion4 {
-  display: none;
-}
-
 body {
   margin: 0;
   padding: 0;
-  background: radial-gradient(circle, #1F1F1F 0%, #0F0F0F 100%);
-  font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  background-color: #00ddc0;
+  overflow: hidden;
 }
 
-.contenedor {
-  max-width: 800px;
-  padding: 20px;
-  box-sizing: border-box;
+.card {
+  text-align: center;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
-  font-size: 2.5em;
-  color: #ff69b4;
-  margin-bottom: 10px;
-}
-
-p {
-  font-size: 1.2em;
-  color: #f0f0f0;
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: 2px 2px 4px #000;
   margin-bottom: 20px;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 1em;
-  background-color: #ff69b4;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.saitama-container {
+  position: relative;
 }
 
-button:hover {
-  background-color: #ff1493;
+#saitama {
+  width: 200px;
+  transition: transform 0.3s ease;
 }
 
-#sorpresa {
-  display: none;
+#surprise-btn {
   margin-top: 20px;
-  font-size: 1.1em;
-  color: #ffb6c1;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  background-color: #ffcc00;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* Responsive: móviles */
-@media (max-width: 768px) {
-  .contenido-seccion2 {
-    flex-direction: column;
-  }
-
-  .imagen-lateral img {
-    width: 100%;
-    height: auto;
-    border-left: none;
-    border-top: 4px solid #ff69b4;
-  }
-
-  .texto-poema {
-    padding: 20px;
-    font-size: 1.2em;
-  }
-
-  h1 {
-    font-size: 2em;
-  }
-
-  p {
-    font-size: 1.1em;
-  }
-
-  button {
-    font-size: 0.95em;
-  }
+#surprise-btn:hover {
+  background-color: #ffaa00;
+  transform: scale(1.1);
 }
 
-/* Responsive: pantallas grandes */
-@media (min-width: 1024px) {
-  .contenedor {
-    padding: 40px;
-  }
+/* Pequeña animación visual cuando se activa */
+#surprise-btn:active {
+  transform: scale(0.95);
+}
 
-  h1 {
-    font-size: 3em;
-  }
+/* Animación del golpe */
+.punch {
+  animation: punch 0.4s ease-in-out;
+}
 
-  p {
-    font-size: 1.3em;
-  }
+@keyframes punch {
+  0% { transform: scale(1) translateX(0); }
+  50% { transform: scale(1.4) translateX(50px); }
+  100% { transform: scale(1) translateX(0); }
+}
+
+/* Confeti */
+#confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
 }
