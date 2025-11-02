@@ -1,401 +1,104 @@
 :root{
-  /* Fondo adaptado al color del cabello de Hatsune Miku (turquesa/verde-agua) */
-  --bg: #00ddc0; /* referencia: tonos usados para Miku */ 
-  --yellow: #f6d34d;
-  --orange: #f0a23b;
-  --red: #d83b3b;
+  --bg: #00ddc0; /* tono inspirado en Hatsune Miku */
+  --button: linear-gradient(180deg,#ffdf6a,#ffbe2b);
   --white: #ffffff;
-  --dark: #2b2b2b;
   --shadow: rgba(0,0,0,0.18);
-  --accent: #ffcc00;
 }
-
-* {box-sizing: border-box}
-html,body {height:100%; margin:0; font-family: 'Poppins', sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
-
-body {
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Poppins',sans-serif;-webkit-font-smoothing:antialiased}
+body{
   background: var(--bg);
   display:flex;
   align-items:center;
   justify-content:center;
+  padding: 12px;
   overflow:hidden;
 }
 
-/* Scene layout */
-.scene {
+/* Main layout */
+.scene{
   width: 100%;
-  height: 100vh;
-  position: relative;
+  max-width: 980px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:center;
-  gap: 14px;
-  padding: 14px;
+  gap:12px;
 }
 
-/* Title visible before surprise */
-.title {
+/* Title */
+.title{
   color: #fff;
-  font-size: 1.4rem;
-  text-shadow: 0 4px 12px rgba(0,0,0,0.25);
   margin:0;
+  font-size:1.2rem;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
-/* Stage contains the character and effects */
-.stage {
-  width: min(900px, 92vw);
-  height: min(520px, 58vh);
+/* canvas wrapper keeps aspect ratio and crops to torso-up on mobile */
+.canvas-wrap{
   position: relative;
+  width: min(860px, 92vw);
+  /* height will be controlled by canvas sizing JS for pixel-ratio */
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
-/* Saitama container (torso-up framing on mobile) */
-.saitama {
-  width: 300px;
-  height: 360px;
-  position: relative;
-  transform-origin: center bottom;
-  transition: transform 0.3s ease;
-  z-index: 5;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.25));
-}
-
-/* Cape */
-.cape {
-  position:absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 64px;
-  width: 340px;
-  height: 260px;
-  background: linear-gradient(180deg,#ffefef,#ffdede 60%, #f6dcd4);
-  border-radius: 40% 40% 10% 10%;
-  z-index:1;
-  clip-path: polygon(0 0,100% 0,100% 70%, 50% 100%, 0 70%);
-  opacity: 0.98;
-}
-
-/* Torso (yellow suit) */
-.torso {
-  position:absolute;
-  top: 150px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  height: 140px;
-  background: linear-gradient(180deg, var(--yellow), #e6c83a);
-  border-radius: 18px;
-  z-index:6;
-  box-shadow: 0 6px 12px var(--shadow) inset;
-}
-
-/* Belt */
-.belt {
-  position:absolute;
-  bottom: 46px;
-  left: 0;
-  right: 0;
-  height: 36px;
-  background: linear-gradient(90deg,#b43b2b,#d83b3b);
-  border-radius: 6px;
-  margin: 0 10px;
-  z-index:7;
-}
-.belt::after{
-  content:'';
-  position:absolute;
-  left:50%;
-  transform: translateX(-50%);
-  top:5px;
-  width: 56px;
-  height: 26px;
-  background: radial-gradient(circle at 30% 30%, #fff6, #0000);
-  border-radius:6px;
-}
-
-/* Legs (kept but will be hidden in mobile crop) */
-.legs {
-  position:absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 60px;
-  display:flex;
-  justify-content:space-between;
-  padding:0 8px;
-  z-index:7;
-}
-.legs::before, .legs::after {
-  content:'';
-  width:48px;
-  height:60px;
-  background: linear-gradient(180deg,#b77b2e,#8a4f22);
-  border-radius: 8px;
-  display:inline-block;
-}
-
-/* Head */
-.head {
-  position:absolute;
-  top: -16px;
-  left:50%;
-  transform: translateX(-50%);
-  width:160px;
-  height:160px;
-  z-index: 10;
-}
-.face {
-  position: absolute;
+/* hero canvas */
+#hero-canvas{
   width: 100%;
-  height: 100%;
-  background: linear-gradient(#ffe6d1,#ffd9bd);
-  border-radius: 50%;
-  border: 4px solid #f2d2b9;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  height: auto;
+  display:block;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px var(--shadow);
+  background: transparent;
 }
 
-/* Simple anime-like face: minimal eyes and mouth */
-.eye {
+/* confetti canvas sits above hero canvas */
+#confetti-canvas{
   position:absolute;
-  top: 60px;
-  width: 18px;
-  height: 6px;
-  background: #221f1f;
-  border-radius: 6px;
-}
-.eye-left { left: 42px; transform: rotate(-3deg); }
-.eye-right { right: 42px; transform: rotate(3deg); }
-.mouth {
-  position:absolute;
-  bottom: 36px;
-  left:50%;
-  transform: translateX(-50%);
-  width: 44px;
-  height: 10px;
-  border-radius: 8px;
-  background: linear-gradient(#4b2f2f,#2d1f1f);
-  opacity:0.85;
-}
-
-/* Collar (white) */
-.collar {
-  position:absolute;
-  bottom: -10px;
-  left:50%;
-  transform: translateX(-50%);
-  width: 130px;
-  height: 34px;
-  background: linear-gradient(180deg,#fff,#f3f3f3);
-  border-radius: 18px;
-  z-index:9;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
-}
-
-/* Arms */
-.arm {
-  position:absolute;
-  top: 190px;
-  width: 40px;
-  height: 120px;
-  background: linear-gradient(180deg,#f6d34d,#e9c541);
-  border-radius: 22px;
-  z-index: 7;
-  transform-origin: top center;
-}
-.arm-left {
-  left: 16%;
-  transform: rotate(10deg);
-}
-.arm-right {
-  right: 16%;
-  transform: rotate(-10deg);
-}
-
-/* Gloves */
-.glove {
-  position:absolute;
-  bottom: -12px;
-  left:50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 46px;
-  background: linear-gradient(180deg,#e24646,#b52727);
-  border-radius: 18px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.18);
-}
-
-/* Punch animation class applied to whole saitama or to arm */
-.punch-saitama {
-  animation: recoil 0.45s ease-in-out;
-}
-@keyframes recoil {
-  0% { transform: translateY(0); }
-  30% { transform: translateY(-6px) translateX(6px) scale(1.02); }
-  100% { transform: translateY(0) translateX(0) scale(1); }
-}
-
-/* Arm punch forward (applies to right arm) */
-.arm-punch {
-  animation: arm-punch 0.35s cubic-bezier(.2,.9,.2,1);
-  transform-origin: top right;
-}
-@keyframes arm-punch {
-  0% { transform: rotate(-10deg) translateX(0) scale(1); }
-  30% { transform: rotate(6deg) translateX(64px) scale(1.02); }
-  60% { transform: rotate(4deg) translateX(84px) scale(0.98); }
-  100% { transform: rotate(-10deg) translateX(0) scale(1); }
-}
-
-/* Impact wave */
-.impact {
-  position:absolute;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  left: calc(50% + 90px);
-  top: calc(50% - 40px);
-  transform: translate(-50%,-50%) scale(0);
-  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.95), rgba(255,255,255,0.65) 30%, rgba(255,255,255,0.0) 60%);
-  z-index: 6;
+  left:0; top:0;
+  width:100%;
+  height:100%;
   pointer-events:none;
-  box-shadow: 0 0 40px rgba(255,255,255,0.55);
-}
-.impact-pop {
-  animation: impact-pop 0.45s ease-out forwards;
-}
-@keyframes impact-pop {
-  0% { transform: translate(-50%,-50%) scale(0); opacity:1; filter: blur(0px);}
-  40% { transform: translate(-50%,-50%) scale(2.2); opacity:1; filter: blur(0px);}
-  100% { transform: translate(-50%,-50%) scale(4.8); opacity:0; filter: blur(10px); }
+  border-radius: 14px;
 }
 
-/* Cake */
-.cake {
+/* final message (appears after punch) */
+.final-msg{
   position:absolute;
-  bottom: 32px;
-  left: calc(50% + 140px);
-  transform: translateX(-50%) scale(0.6);
-  z-index: 4;
-  transition: transform 0.5s cubic-bezier(.2,.9,.2,1), opacity 0.5s;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.cake .cake-body {
-  width:140px;
-  height:100px;
-  background: linear-gradient(180deg,#f3c7d6,#eaa7c6);
-  border-radius: 12px;
-  position:relative;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
-}
-.cake .icing{
-  position:absolute;
-  left:0; right:0; top:-10px;
-  height:28px;
-  background: linear-gradient(180deg,#fff0,#fff);
-  border-radius:0 0 16px 16px;
-  box-shadow: inset 0 4px 8px rgba(255,255,255,0.6);
-}
-.cake .candles {
-  position:absolute;
-  top:-22px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:6px;
-}
-.candle {
-  width:6px;
-  height:22px;
-  background: linear-gradient(180deg,#ffe77a,#ffb84d);
-  border-radius: 2px;
-  position:relative;
-}
-.candle::after {
-  content:'';
-  position:absolute;
-  top:-8px;
-  left:50%;
-  transform:translateX(-50%);
-  width:8px;
-  height:8px;
-  background: radial-gradient(circle at 30% 30%, #fff9cc, #ffc29a);
-  border-radius:50%;
-}
-
-/* final message */
-.final-msg {
-  position:absolute;
-  left:calc(50% + 140px);
-  bottom: -10px;
-  transform: translateX(-50%) translateY(6px);
-  font-size:1.05rem;
-  color:#fff;
+  right: 12px;
+  bottom: 10px;
   background: rgba(0,0,0,0.18);
-  padding:8px 12px;
-  border-radius:10px;
-  z-index:6;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 10px;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.18);
+  font-weight:600;
   opacity:0;
-  transition: opacity 0.5s, transform 0.5s;
+  transform: translateY(6px) scale(0.96);
+  transition: opacity .45s, transform .45s;
+  z-index: 6;
 }
-
-/* Hidden helper */
-.hidden { opacity:0; pointer-events:none; transform: translateY(10px) scale(0.9); }
-.visible { opacity:1; pointer-events:auto; transform: translateY(0) scale(1); }
+.final-msg.visible{ opacity:1; transform: translateY(0) scale(1); }
 
 /* Button */
-.btn {
-  appearance:none;
+.btn{
   border: none;
-  font-size: 1.05rem;
-  padding: 12px 18px;
+  background: var(--button);
+  padding: 10px 16px;
   border-radius: 12px;
-  background: linear-gradient(180deg,#ffdf6a,#ffbe2b);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-  cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.12s;
-  z-index: 30;
+  font-size: 1rem;
+  cursor:pointer;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
 }
-.btn:active { transform: translateY(2px) scale(0.99) }
+.btn:active{ transform: translateY(2px) }
 
-/* Responsive - mobile: crop to torso-up, scale down, reposition cake/message */
+/* Accessibility helper */
+.visually-hidden{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+
+/* Responsive: crop to torso-up on small screens */
 @media (max-width:720px){
-  .saitama {
-    width: 220px;
-    height: 300px;
-  }
-
-  /* crop legs: hide them to keep torso-up */
-  .legs, .legs::before, .legs::after { display:none; }
-
-  /* reposition cape and torso a bit higher */
-  .cape { top: 40px; width: 300px; height: 220px; }
-  .torso { top: 120px; width: 170px; height: 120px; }
-
-  /* arms reposition for mobile */
-  .arm-left { left: 10%; top: 170px; }
-  .arm-right { right: 10%; top: 170px; }
-
-  /* cake closer and scaled for mobile */
-  .cake { left: calc(50% + 100px); bottom: 16px; transform: translateX(-50%) scale(0.85); }
-  .final-msg { left: calc(50% + 100px); bottom: 8px; font-size: 0.95rem; }
-
-  .stage { height: 60vh; }
-}
-
-/* even smaller phones */
-@media (max-width:420px){
-  .saitama { width: 190px; height: 260px; }
-  .cape { top: 28px; width: 260px; height: 200px; }
-  .torso { top: 100px; width: 150px; height: 110px; }
-  .arm-left { left: 8%; }
-  .arm-right { right: 8%; }
-  .cake { left: calc(50% + 86px); transform: translateX(-50%) scale(0.9); bottom: 8px; }
-  .final-msg { left: calc(50% + 86px); bottom: 2px; font-size: 0.9rem; }
+  .canvas-wrap{ width: 96vw; }
+  .title{ font-size: 1.05rem; }
+  .final-msg{ right: 8px; bottom: 6px; font-size:0.95rem; }
 }
