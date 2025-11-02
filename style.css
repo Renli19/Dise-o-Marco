@@ -1,13 +1,13 @@
 body {
   margin: 0;
-  padding: 0;
-  background-color: #39c5bb; /* Color cabello de Hatsune Miku */
+  background-color: #39c5bb; /* tono cabello de Hatsune Miku */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden;
   flex-direction: column;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
@@ -22,40 +22,37 @@ canvas {
 }
 
 #surprise-btn {
-  margin-top: 20px;
+  margin-top: 1rem;
   padding: 12px 24px;
   font-size: 1.2rem;
-  background-color: #ffcc00;
+  background: #ffcc00;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.2s, background 0.2s;
 }
-
 #surprise-btn:hover {
-  background-color: #ffaa00;
-  transform: scale(1.1);
+  background: #ffaa00;
+  transform: scale(1.05);
 }
 
 h1 {
-  font-family: 'Poppins', sans-serif;
-  color: white;
+  color: #fff;
   text-shadow: 2px 2px 4px #000;
-  margin-top: 20px;
-  font-size: 1.8rem;
+  margin-top: 1rem;
 }
 
 .hidden {
   display: none;
 }
 
-/* Responsivo */
+/* Responsive */
 @media (max-width: 600px) {
-  h1 {
-    font-size: 1.4rem;
-  }
   #surprise-btn {
     font-size: 1rem;
     padding: 10px 18px;
+  }
+  h1 {
+    font-size: 1.3rem;
   }
 }
