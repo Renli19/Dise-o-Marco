@@ -3,23 +3,26 @@ const ctx = canvas.getContext("2d");
 const btn = document.getElementById("surprise-btn");
 const msg = document.getElementById("birthday-msg");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight * 0.7;
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight * 0.7;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
-// Variables del personaje
 let punchActive = false;
 let frame = 0;
 
-// 🎨 Dibuja Saitama
+// ---- Dibujar a Saitama ----
 function drawSaitama() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const centerX = canvas.width / 2;
-  const centerY = canvas.height / 2 + 50;
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2 + 50;
   const scale = Math.min(canvas.width / 600, 1);
 
   ctx.save();
-  ctx.translate(centerX, centerY);
+  ctx.translate(cx, cy);
   ctx.scale(scale, scale);
 
   // Cabeza
@@ -28,49 +31,48 @@ function drawSaitama() {
   ctx.arc(0, -150, 60, 0, Math.PI * 2);
   ctx.fill();
 
-  // Cuerpo
+  // Traje
   ctx.fillStyle = "#ffcc00";
   ctx.beginPath();
   ctx.moveTo(-60, -90);
   ctx.lineTo(60, -90);
-  ctx.lineTo(80, 80);
-  ctx.lineTo(-80, 80);
+  ctx.lineTo(70, 80);
+  ctx.lineTo(-70, 80);
   ctx.closePath();
   ctx.fill();
 
   // Capa
-  ctx.fillStyle = "#ffffff";
+  ctx.fillStyle = "#fff";
   ctx.beginPath();
-  ctx.moveTo(-80, -90);
-  ctx.quadraticCurveTo(0, -40, 80, -90);
-  ctx.lineTo(100, 120);
-  ctx.lineTo(-100, 120);
+  ctx.moveTo(-70, -90);
+  ctx.quadraticCurveTo(0, -40, 70, -90);
+  ctx.lineTo(80, 100);
+  ctx.lineTo(-80, 100);
   ctx.closePath();
   ctx.fill();
 
   // Guantes
-  ctx.fillStyle = "#ff0000";
-  ctx.beginPath();
+  ctx.fillStyle = "#f00";
   const handX = punchActive ? 130 : 80;
+  ctx.beginPath();
   ctx.arc(handX, -20, 20, 0, Math.PI * 2);
   ctx.fill();
-
   ctx.beginPath();
   ctx.arc(-80, -20, 20, 0, Math.PI * 2);
   ctx.fill();
 
-  // Cara (ojos)
+  // Ojos
   ctx.fillStyle = "#000";
   ctx.beginPath();
-  ctx.arc(-20, -160, 6, 0, Math.PI * 2);
-  ctx.arc(20, -160, 6, 0, Math.PI * 2);
+  ctx.arc(-20, -160, 5, 0, Math.PI * 2);
+  ctx.arc(20, -160, 5, 0, Math.PI * 2);
   ctx.fill();
 
-  // Boca seria
+  // Boca
+  ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(-15, -135);
   ctx.lineTo(15, -135);
-  ctx.lineWidth = 2;
   ctx.strokeStyle = "#000";
   ctx.stroke();
 
@@ -80,17 +82,17 @@ function drawSaitama() {
     ctx.strokeStyle = "#fff";
     ctx.lineWidth = 8;
     ctx.beginPath();
-    ctx.arc(handX + 10, -20, frame * 10, 0, Math.PI * 2);
+    ctx.arc(handX + 10, -20, frame * 8, 0, Math.PI * 2);
     ctx.stroke();
     ctx.globalAlpha = 1;
   }
 
-  // Pastel (solo después del golpe)
-  if (!punchActive && frame > 30) {
+  // Pastel después del golpe
+  if (!punchActive && frame > 40) {
     ctx.fillStyle = "#fff";
-    ctx.fillRect(-40, -10, 80, 30);
+    ctx.fillRect(-40, -10, 80, 25);
     ctx.fillStyle = "#ff66aa";
-    ctx.fillRect(-40, -10, 80, 10);
+    ctx.fillRect(-40, -10, 80, 8);
     ctx.fillStyle = "#ffaa00";
     ctx.fillRect(-5, -25, 10, 15);
   }
@@ -98,47 +100,49 @@ function drawSaitama() {
   ctx.restore();
 }
 
-// ⚙️ Animación
-function animate() {
+// ---- Animación continua ----
+function loop() {
   frame++;
   drawSaitama();
-  requestAnimationFrame(animate);
+  drawConfetti();
+  requestAnimationFrame(loop);
 }
-animate();
+loop();
 
-// 🎁 Botón sorpresa
+// ---- Evento botón ----
 btn.addEventListener("click", () => {
   if (punchActive) return;
   punchActive = true;
   frame = 0;
   playPunchSound();
+
   setTimeout(() => {
     punchActive = false;
     msg.classList.remove("hidden");
     startConfetti();
-  }, 1000);
+  }, 700);
 });
 
-// 🔊 Web Audio API (efecto golpe)
+// ---- Sonido del golpe (Web Audio API) ----
 function playPunchSound() {
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
 
   osc.type = "square";
-  osc.frequency.setValueAtTime(80, audioCtx.currentTime);
-  gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+  osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+  gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
   osc.connect(gain);
   gain.connect(audioCtx.destination);
   osc.start();
-  osc.stop(audioCtx.currentTime + 0.3);
+  osc.stop(audioCtx.currentTime + 0.2);
 }
 
-// 🎊 Confeti
+// ---- Confeti ----
 let confetti = [];
 function startConfetti() {
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 150; i++) {
     confetti.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height - canvas.height,
@@ -148,7 +152,6 @@ function startConfetti() {
     });
   }
 }
-
 function drawConfetti() {
   confetti.forEach((c) => {
     ctx.fillStyle = c.color;
@@ -157,5 +160,3 @@ function drawConfetti() {
     if (c.y > canvas.height) c.y = -10;
   });
 }
-
-setInterval(drawConfetti, 30);
