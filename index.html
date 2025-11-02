@@ -1,30 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Feliz Cumpleaños Angel 🎂</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="scene">
-    <h1 id="pre-title" class="title">🎉 ¡Sorpresa! 🎉</h1>
-
-    <div class="canvas-wrap">
-      <!-- canvas principal para Saitama y efectos -->
-      <canvas id="hero-canvas" aria-label="Saitama animado"></canvas>
-
-      <!-- canvas para confeti -->
-      <canvas id="confetti-canvas" aria-hidden="true"></canvas>
-
-      <!-- Impact ripple (for accessibility fallback) -->
-      <div id="final-msg" class="final-msg visually-hidden">🎂 Feliz cumpleaños Angel 🎂</div>
-    </div>
-
-    <button id="surprise-btn" class="btn">🎁 Sorpresa</button>
-  </main>
-
+  <div class="container">
+    <canvas id="saitamaCanvas"></canvas>
+    <button id="surprise-btn">🎁 Sorpresa</button>
+    <h1 id="birthday-msg" class="hidden">🎉 Feliz Cumpleaños Angel 🎉</h1>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
